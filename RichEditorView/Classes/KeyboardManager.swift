@@ -20,14 +20,14 @@ open class KeyboardManager: NSObject {
         The parent view that the toolbar should be added to.
         Should normally be the top-level view of a UIViewController
     */
-    @objc weak var view: UIView?
+    @objc public weak var view: UIView?
 
     /**
         The toolbar that will be shown and hidden.
     */
-    @objc var toolbar: RichEditorToolbar
+    @objc public var toolbar: RichEditorToolbar
 
-    @objc init(view: UIView) {
+    @objc public init(view: UIView) {
         self.view = view
         toolbar = RichEditorToolbar(frame: CGRect(x: 0, y: view.bounds.height, width: view.bounds.width, height: 44))
 //        toolbar.options = RichEditorOptions.all()
@@ -36,7 +36,7 @@ open class KeyboardManager: NSObject {
     /**
         Starts monitoring for keyboard notifications in order to show/hide the toolbar
     */
-    @objc func beginMonitoring() {
+    @objc public func beginMonitoring() {
         let sel = #selector(keyboardWillShowOrHide(_:))
         NotificationCenter.default.addObserver(self, selector: sel, name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: sel, name: UIResponder.keyboardWillHideNotification, object: nil)
@@ -45,7 +45,7 @@ open class KeyboardManager: NSObject {
     /**
         Stops monitoring for keyboard notifications
     */
-    @objc func stopMonitoring() {
+    @objc public func stopMonitoring() {
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
     }
@@ -53,7 +53,7 @@ open class KeyboardManager: NSObject {
     /**
         Called when a keyboard notification is recieved. Takes are of handling the showing or hiding of the toolbar
     */
-    @objc func keyboardWillShowOrHide(_ notification: Notification) {
+    @objc public func keyboardWillShowOrHide(_ notification: Notification) {
         let info = notification.userInfo ?? [:]
         let duration = TimeInterval((info[UIResponder.keyboardAnimationDurationUserInfoKey] as? NSNumber)?.floatValue ?? 0.25)
         let curve = UInt((info[UIResponder.keyboardAnimationCurveUserInfoKey] as? NSNumber)?.uintValue ?? 0)
