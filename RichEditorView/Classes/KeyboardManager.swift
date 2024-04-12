@@ -7,13 +7,13 @@
 //
 
 import UIKit
-import RichEditorView
+//import RichEditorView
 
 /**
     KeyboardManager is a class that takes care of showing and hiding the RichEditorToolbar when the keyboard is shown.
     As opposed to having this logic in multiple places, it is encapsulated in here. All that needs to change is the parent view.
 */
-class KeyboardManager: NSObject {
+@objcMembers open class KeyboardManager: NSObject {
 
     /**
         The parent view that the toolbar should be added to.
