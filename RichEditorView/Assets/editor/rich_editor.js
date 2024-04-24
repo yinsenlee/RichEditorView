@@ -131,7 +131,8 @@ RE.removeFormat = function() {
 };
 
 RE.setFontSize = function(size) {
-    RE.editor.style.fontSize = size;
+//    RE.editor.style.fontSize = size;
+    document.execCommand("fontSize", false, fontSize);
 };
 
 RE.setBackgroundColor = function(color) {
@@ -250,9 +251,10 @@ RE.insertHTML = function(html) {
 RE.insertLink = function(url, title) {
     RE.restorerange();
     var sel = document.getSelection();
-    if (sel.toString().length !== 0) {
+    if (sel.toString().length == 0) {
+        document.execCommand("insertHTML",false,"<a href='"+url+"'>"+title+"</a>");
+    } else {
         if (sel.rangeCount) {
-
             var el = document.createElement("a");
             el.setAttribute("href", url);
             el.setAttribute("title", title);
